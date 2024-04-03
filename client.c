@@ -432,8 +432,8 @@ main(int argc, char *argv[])
 {
     setlinebuf(stdout);
     struct client_state state = { 0 };
-    state.width = 640;
-	state.height = 480;
+    state.width = 1366;
+    state.height = 734;
     state.wl_display = wl_display_connect(NULL);
     state.wl_registry = wl_display_get_registry(state.wl_display);
     state.xkb_context = xkb_context_new(XKB_CONTEXT_NO_DEFAULT_INCLUDES);
