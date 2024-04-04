@@ -432,8 +432,23 @@ main(int argc, char *argv[])
 {
     setlinebuf(stdout);
     struct client_state state = { 0 };
+    int opts;
+
     state.width = 1366;
     state.height = 734;
+
+    while ((opts = getopt(argc, argv, "w:h:")) != -1)
+        switch (opts) {
+          case 'w':
+            state.width = atoi(optarg);
+            break;
+          case 'h':
+            state.height = atoi(optarg);
+            break;
+          default:
+            abort();
+          }
+
     state.wl_display = wl_display_connect(NULL);
     state.wl_registry = wl_display_get_registry(state.wl_display);
     state.xkb_context = xkb_context_new(XKB_CONTEXT_NO_DEFAULT_INCLUDES);
