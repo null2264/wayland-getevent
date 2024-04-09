@@ -318,6 +318,8 @@ char
     switch (button_code) {
         case BTN_LEFT:
             return "BTN_LEFT";
+        case BTN_MIDDLE:
+            return "BTN_MIDDLE";
         case BTN_EXTRA:
             return "BTN_EXTRA";
         case BTN_SIDE:
