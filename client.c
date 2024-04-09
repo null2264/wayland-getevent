@@ -1,3 +1,4 @@
+// vim: et
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <errno.h>
@@ -311,13 +312,27 @@ wl_pointer_motion(void *data, struct wl_pointer *wl_pointer, uint32_t time,
     printf("/dev/input/wl_pointer_motion: EV_ABS ABS_Y %d\n", wl_fixed_to_int(surface_y));
 }
 
+char
+*get_button_name(uint32_t button_code)
+{
+    switch (button_code) {
+        case BTN_LEFT:
+            return "BTN_LEFT";
+        case BTN_EXTRA:
+            return "BTN_EXTRA";
+        case BTN_SIDE:
+            return "BTN_SIDE";
+        default:
+            return "BTN_RIGHT";
+    }
+}
 
 static void
 wl_pointer_button(void *data, struct wl_pointer *wl_pointer, uint32_t serial,
                uint32_t time, uint32_t button, uint32_t state)
 {
     int action = state == WL_POINTER_BUTTON_STATE_PRESSED ? 1 : 0;
-    const char *code = button == BTN_LEFT ? "BTN_LEFT" : "BTN_RIGHT";
+    const char *code = get_button_name(button);
     printf("/dev/input/wl_pointer_button: EV_KEY %s %d\n", code, action);
 }
 
