@@ -1,4 +1,4 @@
-// vim: et
+// vim: set ts=4 sw=4 et:
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <errno.h>
@@ -463,8 +463,8 @@ main(int argc, char *argv[])
             state.height = atoi(optarg);
             break;
           default:
-            abort();
-          }
+            exit(1);
+        }
 
     state.wl_display = wl_display_connect(NULL);
     state.wl_registry = wl_display_get_registry(state.wl_display);
