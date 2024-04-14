@@ -1,4 +1,4 @@
-// vim: set ts=4 sw=4 et:
+// vim: et
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <errno.h>
