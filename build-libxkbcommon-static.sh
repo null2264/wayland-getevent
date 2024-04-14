@@ -1,11 +1,13 @@
 #!/bin/bash
 source ./build-common.sh || exit 1
 
-sha256sum=ebbafde6d2d43a305c73c0830226ff38900565975ed6c52029957e9417ac5191
-download_file xkbcommon-1.5.0.zip $sha256sum 'https://codeload.github.com/xkbcommon/libxkbcommon/zip/refs/tags/xkbcommon-1.5.0'
+pkgver="1.6.0"
 
-bsdtar -xf xkbcommon-1.5.0.zip || unzip -q xkbcommon-1.5.0.zip
-cd libxkbcommon-xkbcommon-1.5.0
+sha256sum=ea2322ef49d0c015dccc90acf629442071a561564d401261635fbcc04ec6c420
+download_file xkbcommon-$pkgver.zip $sha256sum https://codeload.github.com/xkbcommon/libxkbcommon/zip/refs/tags/xkbcommon-$pkgver
+
+bsdtar -xf xkbcommon-$pkgver.zip || unzip -q xkbcommon-$pkgver.zip
+cd libxkbcommon-xkbcommon-$pkgver
 
 meson setup build \
     --prefix /usr --libdir lib \
