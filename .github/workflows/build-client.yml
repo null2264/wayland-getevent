@@ -23,7 +23,7 @@ jobs:
 
     - name: Update Release
       uses: andelf/nightly-release@main
-      if: github.repository == 'Xtr126/wayland-getevent' || github.repository == 'null2264/wayland-getevent'
+      if: github.repository == 'null2264/wayland-getevent'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -35,4 +35,3 @@ jobs:
           Based on ${{ github.sha }}
         files: |
           ./client
-
