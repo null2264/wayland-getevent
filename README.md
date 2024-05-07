@@ -1,6 +1,6 @@
 A tool like Android getevent that is being developed for use in [XtMapper](https://github.com/Xtr126/XtMapper) to support waydroid.  
 Download executable binary from [releases](https://github.com/Xtr126/wayland-getevent/releases).  
-It is advisable to build the client from source instead so that it can link against the system libraries.
+It is advisable to build the client from source instead so that it can link against the system libraries.  
 
 ---
 Usage
@@ -11,19 +11,31 @@ chmod a+x ./client
 ./client | sudo waydroid shell -- sh /sdcard/Android/data/xtr.keymapper/files/xtMapper.sh --wayland-client
 ```
 
-- This [hack](https://github.com/casualsnek/waydroid_script?tab=readme-ov-file#granting-full-permission-for-apps-data-hack) may be needed if xtMapper.sh can't be found. Or use the following script instead:
+## Important
 
-```sh
-doas waydroid shell -- sh -c 'echo "/system/bin/app_process -Djava.library.path=$(echo /data/app/*/xtr.keymapper*/lib/x86_64) -Djava.class.path=$(echo /data/app/*/xtr.keymapper*/base.apk) / xtr.keymapper.server.RemoteServiceShell --wayland-client" > /tmp/xtmapper.sh'
+- This [hack](https://github.com/casualsnek/waydroid_script?tab=readme-ov-file#granting-full-permission-for-apps-data-hack) may be needed if xtMapper.sh can't be found. It will also fail to write the script if waydroid container is rooted. In that case unroot the waydroid container and try again. The app doesn't require root access to work.  
+  Or you can use the following script instead:
 
-./client | doas waydroid shell -- sh /tmp/xtmapper.sh
-```
+    ```sh
+    doas waydroid shell -- sh -c 'echo "/system/bin/app_process -Djava.library.path=$(echo /data/app/*/xtr.keymapper*/lib/x86_64) -Djava.class.path=$(echo /data/app/*/xtr.keymapper*/base.apk) / xtr.keymapper.server.RemoteServiceShell --wayland-client" > /tmp/xtmapper.sh'
+
+    ./client | doas waydroid shell -- sh /tmp/xtmapper.sh
+    ```
+
+- If cursor is invisible, enable cursor on subsurface
+
+    ```
+    waydroid prop set persist.waydroid.cursor_on_subsurface true 
+    ```
 
 - This will create an invisible wayland window named "XtMapper" from which keyboard and mouse input events are captured and then forwarded to XtMapper. 
 - Minimize the client window and click on start button in XtMapper app, then maximize the client window back.  
 - For it to work as intended, it's size should be same as that of the waydroid window and overlay the waydroid window.    
 - If it launched fine, "using wayland client" will be output on the terminal.  
-- [Auto Profiling](https://xtr126.github.io/XtMapper-docs/features/auto_profiling/) should be disabled in settings.  
+- [Auto Profiling](https://xtr126.github.io/XtMapper-docs/features/auto_profiling/) should be disabled in settings.
+> [!NOTE]
+> This tool has been discontinued. An alternative version by using a modified version of cage as passthrough compositor is being worked on. [More details](./README-alt.md)
+
 ![image](https://github.com/Xtr126/wayland-getevent/assets/80520774/bd0d3df7-eb92-4816-8c67-506175709f23)
 
 ---
